@@ -58,6 +58,19 @@ ALL_NODES=(
     '9.147.21.210'
 )
 
+function replace() {
+    KEY=$1
+    VALUE=$2
+    FILE=$3
+
+    #区分mac os和linux系统
+    if [ "$(uname)" == "Darwin" ];then
+        sed -i "" "s#$KEY#$VALUE#g" $FILE
+    elif [ "$(uname)" == "Linux" ];then
+        sed -i "s#$KEY#$VALUE#g" $FILE
+    fi
+}
+
 #部署master服务
 function deploy_seaweedfs_master() {
     echo "deploy_seaweedfs_master"
